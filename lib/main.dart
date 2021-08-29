@@ -35,45 +35,83 @@ class _HomePageState extends State<HomePage> {
     '',
   ]; // значек на поле
 
+  var myTextStyle = TextStyle(color: Colors.white, fontSize: 30);
+  int oScore = 0;
+  int xScore = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[800], // бэкграунд
-      body: GridView.builder(
-          //сетка
-          itemCount: 9, // из 9 элементов
-          gridDelegate: // 3*3
-              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
-          itemBuilder: (BuildContext context, int index) {
-            return GestureDetector(
-              // ловим тап
-              onTap: () {
-                _tapped(index); // в функцию попадает индекс ячейки
-              }, // событие при тапе
+      body: Column(
+        children: [
+          Expanded(
               child: Container(
-                // рисуем плитки поля
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey),
-                ),
-                child: Center(
-                  // с текстом по центру
-                  child: Text(
-                    sign[index],
-                    style: TextStyle(color: Colors.white, fontSize: 40),
-                  ),
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Padding(
+                padding: const EdgeInsets.all(30.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Player X', style: myTextStyle),
+                    Text(xScore.toString(), style: myTextStyle)
+                  ],
                 ),
               ),
-            );
-          }),
+              Padding(
+                padding: const EdgeInsets.all(30.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Player O', style: myTextStyle),
+                    Text(oScore.toString(), style: myTextStyle)
+                  ],
+                ),
+              ),
+            ]),
+          )),
+          Expanded(
+            flex: 3,
+            child: GridView.builder(
+                //сетка
+                itemCount: 9, // из 9 элементов
+                gridDelegate: // 3*3
+                    SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3),
+                itemBuilder: (BuildContext context, int index) {
+                  return GestureDetector(
+                    // ловим тап
+                    onTap: () {
+                      _tapped(index); // в функцию попадает индекс ячейки
+                    }, // событие при тапе
+                    child: Container(
+                      // рисуем плитки поля
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey),
+                      ),
+                      child: Center(
+                        // с текстом по центру
+                        child: Text(
+                          sign[index],
+                          style: TextStyle(color: Colors.white, fontSize: 40),
+                        ),
+                      ),
+                    ),
+                  );
+                }),
+          ),
+          Expanded(child: Container()),
+        ],
+      ),
     );
   }
 
   void _tapped(int index) {
     // стейт можно изменить только внутри setState
     setState(() {
-      if (onTurn) {
+      if (onTurn && sign[index] == '') {
         sign[index] = 'X';
-      } else {
+      } else if (!onTurn && sign[index] == '') {
         sign[index] = 'O';
       }
 
