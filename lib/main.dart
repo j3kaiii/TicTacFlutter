@@ -160,11 +160,35 @@ class _HomePageState extends State<HomePage> {
 
   void _showWinDialog(String winner) {
     showDialog(
+        barrierDismissible: false,
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text('WINNER IS $winner'),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    _clearBoard();
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('Play Again'))
+            ],
           );
         });
+
+    if (winner == 'X') {
+      xScore++;
+    } else if (winner == 'O') {
+      oScore++;
+    }
+    _clearBoard();
+  }
+
+  void _clearBoard() {
+    setState(() {
+      for (int i = 0; i < 9; i++) {
+        sign[i] = '';
+      }
+    });
   }
 }
