@@ -39,7 +39,7 @@ class _AboutScreenState extends State<AboutScreen>
                 Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: Text(
-                    'Пишу на Dart/Flutter уже 3 дня!',
+                    'Пишу на Dart/Flutter!',
                     style: mySmallFont,
                   ),
                 ),

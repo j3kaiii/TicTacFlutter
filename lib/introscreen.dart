@@ -1,8 +1,8 @@
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tic_tac/about.dart';
-import 'package:tic_tac/homepage.dart';
+import 'about.dart';
+import 'homepage.dart';
 
 class IntroScreen extends StatefulWidget {
   // создаем стейт для изменяемого виджета
